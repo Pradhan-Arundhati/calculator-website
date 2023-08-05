@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        #calculator {
+            max-width: 300px;
+            margin: 0 auto;
+            padding: 10px;
+            border: 1px solid #ccc;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        #result {
+            font-size: 24px;
+            text-align: right;
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+
+        .btn {
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+            margin: 5px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .btn:hover {
+            background-color: #f2f2f2;
+        }
+
+        .btn.operator {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .btn.equal {
+            background-color: #ff9800;
+            color: white;
+        }
+
+        .btn.clear {
+            background-color: #e74c3c;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="calculator">
+        <div id="result"></div>
+        <div>
+            <button class="btn" onclick="clearDisplay()">C</button>
+            <button class="btn" onclick="appendInput('/')">/</button>
+            <button class="btn" onclick="appendInput('*')">*</button>
+            <button class="btn" onclick="appendInput('-')">-</button>
+        </div>
+        <div>
+            <button class="btn" onclick="appendInput('7')">7</button>
+            <button class="btn" onclick="appendInput('8')">8</button>
+            <button class="btn" onclick="appendInput('9')">9</button>
+            <button class="btn operator" onclick="appendInput('+')">+</button>
+        </div>
+        <div>
+            <button class="btn" onclick="appendInput('4')">4</button>
+            <button class="btn" onclick="appendInput('5')">5</button>
+            <button class="btn" onclick="appendInput('6')">6</button>
+            <button class="btn" onclick="appendInput('0')">0</button>
+        </div>
+        <div>
+            <button class="btn" onclick="appendInput('1')">1</button>
+            <button class="btn" onclick="appendInput('2')">2</button>
+            <button class="btn" onclick="appendInput('3')">3</button>
+            <button class="btn equal" onclick="calculate()">=</button>
+        </div>
+    </div>
+
+    <script>
+        const resultElement = document.getElementById('result');
+        let currentInput = '';
+
+        function appendInput(value) {
+            currentInput += value;
+            updateDisplay();
+        }
+
+        function clearDisplay() {
+            currentInput = '';
+            updateDisplay();
+        }
+
+        function updateDisplay() {
+            resultElement.textContent = currentInput;
+        }
+
+        function calculate() {
+            try {
+                currentInput = eval(currentInput).toString();
+                updateDisplay();
+            } catch (error) {
+                currentInput = 'Error';
+                updateDisplay();
+            }
+        }
+    </script>
+</body>
+
+</html>
